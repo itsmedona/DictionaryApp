@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   buildSearchWidget() {
     return SearchBar(
-      hintText: "Search word here",
+      hintText: "Search word here",  
       onSubmitted: (value) {
         //take the meaning from api
       },
