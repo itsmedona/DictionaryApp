@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'homescreen/homescreen.dart';
+import 'view/homescreen/homescreen.dart';
 
 void main() {
   runApp(DictApp());
