@@ -8,7 +8,8 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(),
-        body: Center(
+        body: Padding(
+          padding: const EdgeInsets.all(16)
       
         )
       ),
