@@ -1,6 +1,6 @@
+import 'package:dict_app/view/splashscreen/splashscreen.dart';
 import 'package:flutter/material.dart';
-
-import 'view/homescreen/homescreen.dart';
+//import 'view/homescreen/homescreen.dart';
 
 void main() {
   runApp(DictApp());
@@ -13,7 +13,8 @@ class DictApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: SplashScreen(),
+      //home: HomeScreen(),
     );
   }
 }
