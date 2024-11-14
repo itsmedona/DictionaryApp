@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Dictionary Chat"),
+          title: Text("Dicto Chat"),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16),
