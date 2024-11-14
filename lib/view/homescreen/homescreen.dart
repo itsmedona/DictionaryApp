@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../controller/api_controller/api_controller.dart';
 import '../../model/dictionary_model/dictionary_model.dart';
 
@@ -11,17 +12,17 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<Map<String, String>> chatMessages = [];
-  TextEditingController _controller = TextEditingController();
-  bool _isLoading = false; // Flag to indicate loading state
-  String? _errorMessage; // To store error message
+  TextEditingController controller = TextEditingController();
+  bool isLoading = false; // Flag to indicate loading state
+  String? errorMessage; // To store error message
 
   // Function to handle word submission
   void onSubmitWord(String word) async {
     if (word.isEmpty) return; // Don't proceed if the input is empty
 
     setState(() {
-      _isLoading = true;
-      _errorMessage = null;
+      isLoading = true;
+      errorMessage = null;
       chatMessages
           .add({'type': 'user', 'message': word}); // Add user input to chat
     });
@@ -35,18 +36,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
       // Add the response to the chat
       setState(() {
-        _isLoading = false;
+        isLoading = false;
         chatMessages.add({'type': 'response', 'message': meaning});
       });
     } catch (error) {
       setState(() {
-        _isLoading = false;
-        _errorMessage = "Failed to load meaning: $error";
+        isLoading = false;
+        errorMessage = "Failed to load meaning: $error";
       });
     }
 
     // Clear the input field after submitting the word
-    _controller.clear();
+    controller.clear();
   }
 
   // Build the search widget (input field + submit button)
@@ -54,29 +55,28 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       children: [
         TextField(
-          controller: _controller,
+          controller: controller,
           decoration: InputDecoration(
             hintText: "Search word here",
             border: OutlineInputBorder(),
             suffixIcon: IconButton(
-              icon: Icon(Icons.search),
+              icon: Icon(Icons.send),
               onPressed: () {
-                onSubmitWord(
-                    _controller.text); // Trigger search on button press
+                onSubmitWord(controller.text); // Trigger search on button press
               },
             ),
           ),
           onSubmitted: (value) =>
               onSubmitWord(value), // Trigger search on "Enter"
         ),
-        if (_isLoading)
+        if (isLoading)
           CircularProgressIndicator(), // Show loading indicator while fetching
-        if (_errorMessage != null)
+        if (errorMessage != null)
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
-            child: Text(
-              _errorMessage!,
-              style: TextStyle(color: Colors.red),
+            child: ChatBubble(
+              message: errorMessage!,
+              isUser: false, // Error messages will be displayed like a response
             ),
           ),
       ],
@@ -88,7 +88,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Dicto Chat"),
+          title: Text(
+            "Dicto Chat",
+            style: GoogleFonts.poppins(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16),
@@ -130,13 +137,15 @@ class ChatBubble extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: isUser ? Colors.blue : Colors.grey[300],
+          color: isUser
+              ? const Color.fromARGB(255, 25, 134, 29) // Green for user
+              : Colors.red, // Red for error or response
           borderRadius: BorderRadius.circular(12),
         ),
         child: Text(
           message,
           style: TextStyle(
-            color: isUser ? Colors.white : Colors.black,
+            color: isUser ? Colors.white : Colors.white, // White text color
           ),
         ),
       ),
