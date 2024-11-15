@@ -89,6 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.green,
           title: Text(
             "Dicto Chat",
             style: GoogleFonts.poppins(
