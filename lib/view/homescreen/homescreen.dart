@@ -99,24 +99,23 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         body: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: chatMessages.length,
-                    itemBuilder: (context, index) {
-                      return ChatBubble(
-                        message: chatMessages[index]['message']!,
-                        isUser: chatMessages[index]['type'] == 'user',
-                      );
-                    },
-                  ),
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: chatMessages.length,
+                  itemBuilder: (context, index) {
+                    return ChatBubble(
+                      message: chatMessages[index]['message']!,
+                      isUser: chatMessages[index]['type'] == 'user',
+                    );
+                  },
                 ),
-                buildSearchWidget(),
-              ],
-            ),
+              ),
+              buildSearchWidget(),
+            ],
           ),
         ),
       ),
