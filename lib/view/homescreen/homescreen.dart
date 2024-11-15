@@ -18,13 +18,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Function to handle word submission
   void onSubmitWord(String word) async {
-    if (word.isEmpty) return; // Don't proceed if the input is empty
-
+    if (word.isEmpty) return; 
+    // Don't proceed if the input is empty
     setState(() {
       isLoading = true;
       errorMessage = null;
       chatMessages
-          .add({'type': 'user', 'message': word}); // Add user input to chat
+          .add({'type': 'user', 'message': word}); 
+          // Add user input to chat
     });
 
     try {
@@ -60,7 +61,9 @@ class _HomeScreenState extends State<HomeScreen> {
             hintText: "Search word here",
             border: OutlineInputBorder(),
             suffixIcon: IconButton(
-              icon: Icon(Icons.send),
+              //icon:Icon(Icons.message),
+              icon: Icon(Icons.send
+              ),
               onPressed: () {
                 onSubmitWord(controller.text); // Trigger search on button press
               },
